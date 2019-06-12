@@ -13,3 +13,7 @@
 - `docker-compose up`
 
 - api available 0.0.0.0:1323
+
+## feedback
+
+### Don't hesitate to post a feedback as a issue :)
