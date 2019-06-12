@@ -3,6 +3,7 @@ package container
 import (
 	"errors"
 	"orchestratus/src/node"
+	"sync"
 )
 
 // Container is the Container definition
@@ -62,6 +63,7 @@ func (c Container) ScheduleContainer() (Container, error) {
 }
 
 var instancesContainers map[string]Container
+var muxContainers sync.Mutex
 
 // GetInstance Get the singleton cache instance
 func GetInstance() map[string]Container {
@@ -73,5 +75,8 @@ func GetInstance() map[string]Container {
 
 // SetInstance Set the singleton cache instance
 func SetInstance(containers map[string]Container) {
+	muxContainers.Lock()
 	instancesContainers = containers
+	muxContainers.Unlock()
+
 }

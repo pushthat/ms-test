@@ -87,7 +87,11 @@ func parseNode() error {
 		if validationErrors != nil {
 			log.Println(validationErrors.Error())
 		} else {
-			nodes[elem.ID] = elem
+			if _, ok := nodes[elem.ID]; ok {
+				log.Println("Parsing node error : node id " + elem.ID + " already used")
+			} else {
+				nodes[elem.ID] = elem
+			}
 		}
 	}
 	node.SetInstance(nodes)

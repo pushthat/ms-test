@@ -1,5 +1,7 @@
 package node
 
+import "sync"
+
 // Capacity represent the capacity definition inside the Node
 type Capacity struct {
 	Total int `json:"total"`
@@ -15,6 +17,7 @@ type Node struct {
 }
 
 var instancesNodes map[string]Node
+var muxNodes sync.Mutex
 
 // GetInstance Get the singleton cache instance
 func GetInstance() map[string]Node {
@@ -26,7 +29,9 @@ func GetInstance() map[string]Node {
 
 // SetInstance Set the singleton cache instance
 func SetInstance(nodes map[string]Node) {
+	muxNodes.Lock()
 	instancesNodes = nodes
+	muxNodes.Unlock()
 }
 
 // ByID is used to sort map by id
