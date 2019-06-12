@@ -16,4 +16,4 @@
 
 ## feedback
 
-### Don't hesitate to post a feedback as a issue :)
+### Don't hesitate to post a feedback as an issue :)
