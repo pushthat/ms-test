@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  api:
+    build: .
+    ports:
+      - "1323:1323"
+    volumes:
+      - /Users/matiasberny/Documents/Project/ms-interview/scheduling-api/JSON/nodes.json:/app/node.json
+    environment:
+      NODE_FILE: "/app/node.json"
