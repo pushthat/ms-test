@@ -17,6 +17,8 @@ type Node struct {
 }
 
 var instancesNodes map[string]Node
+var indexLabel map[string][]string
+var muxLabel sync.Mutex
 var muxNodes sync.Mutex
 
 // GetInstance Get the node instance
@@ -32,6 +34,21 @@ func SetInstance(nodes map[string]Node) {
 	muxNodes.Lock()
 	instancesNodes = nodes
 	muxNodes.Unlock()
+}
+
+// GetInstanceLabel Get the label index instance
+func GetInstanceLabel() map[string][]string {
+	if indexLabel == nil {
+		indexLabel = make(map[string][]string)
+	}
+	return indexLabel
+}
+
+// SetInstanceLabel Set the label index instance
+func SetInstanceLabel(nodes map[string][]string) {
+	muxLabel.Lock()
+	indexLabel = nodes
+	muxLabel.Unlock()
 }
 
 // ByID is used to sort map by id

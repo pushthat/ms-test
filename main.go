@@ -81,6 +81,7 @@ func parseNode() error {
 	valid := &objValidator.NodeRequestValidator{Validator: validator.New()}
 
 	nodes := make(map[string]node.Node)
+	nodeIndexLabel := make(map[string][]string)
 
 	for _, elem := range dat {
 		validationErrors := valid.Validate(elem)
@@ -91,10 +92,17 @@ func parseNode() error {
 				log.Println("Parsing node error : node id " + elem.ID + " already used")
 			} else {
 				nodes[elem.ID] = elem
+				for labelKey, labelValue := range elem.SchedulerHints {
+					if _, ok := nodeIndexLabel[labelKey]; !ok {
+						nodeIndexLabel[labelKey] = make([]string, 0)
+					}
+					nodeIndexLabel[labelKey] = append(nodeIndexLabel[labelKey+":"+labelValue], elem.ID)
+				}
 			}
 		}
 	}
 	node.SetInstance(nodes)
+	node.SetInstanceLabel(nodeIndexLabel)
 	return nil
 }
 
