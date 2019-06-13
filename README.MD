@@ -14,8 +14,6 @@
 
 - api available 0.0.0.0:1323
 
-## Bonus
-
 ## feedback
 
-### Don't hesitate to post a feedback as a issue :)
+### Don't hesitate to post a feedback as an issue :)
