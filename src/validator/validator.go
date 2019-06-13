@@ -1,6 +1,8 @@
 package validator
 
 import (
+	"orchestratus/src/node"
+
 	"gopkg.in/go-playground/validator.v9"
 )
 
@@ -18,6 +20,14 @@ func (cv *ContainerRequestValidator) Validate(i interface{}) error {
 	return cv.Validator.Struct(i)
 }
 
-func (nv *NodeRequestValidator) Validate(i interface{}) error {
-	return nv.Validator.Struct(i)
+func (nv *NodeRequestValidator) Validate(i node.Node) error {
+	err := nv.Validator.Struct(i)
+	if err != nil {
+		return err
+	}
+	nv.Validator.Struct(i.Capacity)
+	if err != nil {
+		return err
+	}
+	return nil
 }
