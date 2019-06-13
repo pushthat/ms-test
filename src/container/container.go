@@ -65,7 +65,7 @@ func (c Container) ScheduleContainer() (Container, error) {
 var instancesContainers map[string]Container
 var muxContainers sync.Mutex
 
-// GetInstance Get the singleton cache instance
+// GetInstance Get the cache instance
 func GetInstance() map[string]Container {
 	if instancesContainers == nil {
 		instancesContainers = make(map[string]Container)
@@ -73,7 +73,7 @@ func GetInstance() map[string]Container {
 	return instancesContainers
 }
 
-// SetInstance Set the singleton cache instance
+// SetInstance Set the cache instance
 func SetInstance(containers map[string]Container) {
 	muxContainers.Lock()
 	instancesContainers = containers
