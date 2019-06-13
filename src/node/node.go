@@ -19,7 +19,7 @@ type Node struct {
 var instancesNodes map[string]Node
 var muxNodes sync.Mutex
 
-// GetInstance Get the singleton cache instance
+// GetInstance Get the node instance
 func GetInstance() map[string]Node {
 	if instancesNodes == nil {
 		instancesNodes = map[string]Node{}
@@ -27,7 +27,7 @@ func GetInstance() map[string]Node {
 	return instancesNodes
 }
 
-// SetInstance Set the singleton cache instance
+// SetInstance Set the node instance
 func SetInstance(nodes map[string]Node) {
 	muxNodes.Lock()
 	instancesNodes = nodes
