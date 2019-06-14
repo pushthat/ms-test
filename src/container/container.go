@@ -46,7 +46,7 @@ func (c Container) ScheduleContainer() (Container, error) {
 	containers := GetInstance()
 
 	for key := range nodes {
-		if c.doesHintMatch(nodes[key]) && nodes[key].Capacity.Total > nodes[key].Capacity.Used {
+		if  nodes[key].Capacity.Total > nodes[key].Capacity.Used && c.doesHintMatch(nodes[key]) {
 			nodeTmp := nodes[key]
 			nodeTmp.Capacity.Used++
 			nodes[key] = nodeTmp
